@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Dispatcher — Nubank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --nu-purple:#820AD1;--nu-purple-light:#A020F0;--nu-purple-dim:rgba(130,10,209,0.15);
+      --nu-purple-border:rgba(130,10,209,0.3);--nu-bg:#0F0018;--nu-surface:#1A0030;
+      --nu-surface2:#220040;--nu-border:rgba(160,32,240,0.2);--nu-border-hover:rgba(160,32,240,0.45);
+      --nu-text:#F0E6FF;--nu-text-muted:#A07FC0;--nu-text-faint:#6A4A8A;
+      --nu-green:#3DDC84;--nu-green-dim:rgba(61,220,132,0.12);
+      --nu-red:#FF6B6B;--nu-red-dim:rgba(255,107,107,0.12);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Google Sans','Helvetica Neue',sans-serif;background:var(--nu-bg);color:var(--nu-text);min-height:100vh}
+    .topbar{background:var(--nu-surface);border-bottom:1px solid var(--nu-border);padding:0 32px;height:60px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10}
+    .nu-mark{width:32px;height:32px;background:var(--nu-purple);border-radius:8px;display:flex;align-items:center;justify-content:center}
+    .nu-mark svg{width:18px;height:18px}
+    .topbar-title{font-size:15px;font-weight:600}
+    .topbar-sub{font-size:12px;color:var(--nu-text-muted);margin-left:2px}
+    .main{max-width:680px;margin:0 auto;padding:32px 24px 64px}
+    .section{margin-bottom:20px}
+    .section-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--nu-text-faint);margin-bottom:10px;padding-left:2px}
+    .card{background:var(--nu-surface);border:1px solid var(--nu-border);border-radius:16px;padding:20px}
+    label{font-size:12px;color:var(--nu-text-muted);display:block;margin-bottom:5px}
+    input,select,textarea{width:100%;font-family:'Google Sans',sans-serif;font-size:13px;padding:9px 12px;background:var(--nu-surface2);border:1px solid var(--nu-border);border-radius:8px;color:var(--nu-text);transition:border-color .15s;appearance:none}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--nu-purple-light);box-shadow:0 0 0 3px rgba(130,10,209,0.15)}
+    input::placeholder,textarea::placeholder{color:var(--nu-text-faint)}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07FC0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+    select option{background:#220040}
+    .field{margin-bottom:14px}.field:last-child{margin-bottom:0}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    textarea{resize:vertical;min-height:60px;line-height:1.5}
+    .person-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .avatar{width:32px;height:32px;border-radius:50%;background:var(--nu-purple-dim);border:1px solid var(--nu-purple-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#C97AF9;flex-shrink:0;transition:background .2s}
+    .avatar.filled{background:var(--nu-purple);color:#fff;border-color:var(--nu-purple)}
+    .person-row input{flex:1;min-width:0}
+    .rm-btn{width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;color:var(--nu-text-faint);font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,color .15s}
+    .rm-btn:hover{background:var(--nu-red-dim);color:var(--nu-red)}
+    .add-btn{width:100%;padding:8px;background:none;border:1px dashed var(--nu-border);border-radius:8px;cursor:pointer;font-family:'Google Sans',sans-serif;font-size:12px;color:var(--nu-text-muted);transition:border-color .15s,color .15s,background .15s;margin-top:10px}
+    .add-btn:hover{border-color:var(--nu-border-hover);color:#C97AF9;background:var(--nu-purple-dim)}
+    .preview-box{background:var(--nu-surface2);border:1px solid var(--nu-border);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--nu-text-muted);min-height:40px;line-height:1.6;font-style:italic}
+    hr{border:none;border-top:1px solid var(--nu-border);margin:16px 0}
+    .send-btn{width:100%;padding:14px;background:var(--nu-purple);border:none;border-radius:12px;font-family:'Google Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:8px;transition:background .15s,transform .1s,opacity .15s}
+    .send-btn:hover{background:var(--nu-purple-light)}
+    .send-btn:active{transform:scale(.98)}
+    .send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0 12px}
+    .stat{background:var(--nu-surface);border:1px solid var(--nu-border);border-radius:10px;padding:12px;text-align:center}
+    .stat-n{font-size:24px;font-weight:700}
+    .stat-l{font-size:11px;color:var(--nu-text-muted);margin-top:2px}
+    .results{display:flex;flex-direction:column;gap:6px}
+    .r-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:13px;border:1px solid transparent;animation:fadeIn .25s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+    .r-pending{background:var(--nu-surface);border-color:var(--nu-border);color:var(--nu-text-muted)}
+    .r-ok{background:var(--nu-green-dim);border-color:rgba(61,220,132,0.3);color:var(--nu-green)}
+    .r-err{background:var(--nu-red-dim);border-color:rgba(255,107,107,0.3);color:var(--nu-red)}
+    .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .spinner{width:14px;height:14px;flex-shrink:0;border:2px solid var(--nu-border);border-top-color:var(--nu-purple-light);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-left:6px}
+    .tag-ok{background:rgba(61,220,132,0.2);color:var(--nu-green)}
+    .r-link{margin-left:auto;font-size:11px;color:#C97AF9;text-decoration:none;white-space:nowrap}
+    .r-link:hover{color:var(--nu-text)}
+    .r-name{font-weight:500}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+<div class="topbar">
+  <div class="nu-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h4l8 12h4V20h-4L8 8H4V4z" fill="white"/></svg></div>
+  <div><span class="topbar-title">Interview Dispatcher</span><span class="topbar-sub"> — Nubank Recruiting</span></div>
+</div>
+<div class="main">
+  <div class="section">
+    <div class="section-label">Participantes</div>
+    <div class="card">
+      <div id="people-list"></div>
+      <button class="add-btn" onclick="addPerson()">+ adicionar pessoa</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Detalhes da entrevista</div>
+    <div class="card">
+      <div class="row2 field">
+        <div><label>Tipo</label>
+          <select id="tipo" onchange="onTipoChange()">
+            <option>Entrevista MLE</option><option>Architecture Case MLE</option>
+            <option>Coding Interview</option><option>System Design</option>
+            <option>Behavioral</option><option>Outro</option>
+          </select>
+        </div>
+        <div><label>Horário</label><input type="time" id="horario" value="13:00" oninput="updatePreview()" /></div>
+      </div>
+      <div class="field hidden" id="outro-field">
+        <label>Especifique o tipo</label>
+        <input type="text" id="outro-tipo" placeholder="Ex: Product Case" oninput="updatePreview()" />
+      </div>
+      <div class="field">
+        <label>Idioma</label>
+        <select id="idioma" onchange="updatePreview()">
+          <option value="pt">Português</option><option value="en">English</option>
+        </select>
+      </div>
+      <hr />
+      <div class="field"><label>Prévia da mensagem</label><div class="preview-box" id="preview"></div></div>
+      <div class="field">
+        <label>Mensagem customizada <span style="color:var(--nu-text-faint);font-size:11px">(opcional)</span></label>
+        <textarea id="custom-msg" placeholder="Deixe vazio para usar a mensagem padrão..." oninput="updatePreview()"></textarea>
+      </div>
+    </div>
+  </div>
+  <button class="send-btn" id="send-btn" onclick="enviar()">Enviar mensagens</button>
+  <div id="results-wrap"></div>
+</div>
+<script>
+let counter=0;
+function initials(n){const p=n.trim().split(' ').filter(Boolean);return p.length===0?'?':p.length===1?p[0][0].toUpperCase():(p[0][0]+p[p.length-1][0]).toUpperCase()}
+function addPerson(){
+  const list=document.getElementById('people-list'),id=counter++;
+  const row=document.createElement('div');row.className='person-row';row.id='row-'+id;
+  row.innerHTML='<div class="avatar" id="av-'+id+'">?</div><input type="text" placeholder="Nome completo" class="person-input" oninput="onNameInput(this,\'av-'+id+'\')" /><button class="rm-btn" onclick="removePerson(\'row-'+id+'\')">×</button>';
+  document.getElementById('people-list').appendChild(row);row.querySelector('input').focus();updatePreview();
+}
+function onNameInput(inp,avId){const av=document.getElementById(avId),ini=initials(inp.value);av.textContent=ini==='?'?'?':ini;av.className=inp.value.trim()?'avatar filled':'avatar';updatePreview()}
+function removePerson(rowId){if(document.querySelectorAll('.person-row').length>1)document.getElementById(rowId).remove();updatePreview()}
+function getNames(){return[...document.querySelectorAll('.person-input')].map(i=>i.value.trim()).filter(Boolean)}
+function getTipo(){const s=document.getElementById('tipo').value;return s==='Outro'?(document.getElementById('outro-tipo').value.trim()||'entrevista'):s}
+function onTipoChange(){document.getElementById('outro-field').classList.toggle('hidden',document.getElementById('tipo').value!=='Outro');updatePreview()}
+function buildMsg(firstName){
+  const custom=document.getElementById('custom-msg').value.trim();if(custom)return custom;
+  const tipo=getTipo(),hora=document.getElementById('horario').value||'—',lang=document.getElementById('idioma').value;
+  return lang==='en'?'Hi '+firstName+"! Hope you're doing well. Are you available to join a "+tipo+' today at '+hora+'?':'Oi, '+firstName+'! Tudo bem? Você consegue participar de um(a) '+tipo+' hoje às '+hora+'?'
+}
+function updatePreview(){const names=getNames();document.getElementById('preview').textContent=buildMsg(names.length?names[0].split(' ')[0]:'[Nome]')}
+addPerson();
+async function enviar(){
+  const names=getNames();if(!names.length){alert('Adicione ao menos uma pessoa.');return}
+  const btn=document.getElementById('send-btn');btn.disabled=true;
+  const wrap=document.getElementById('results-wrap');wrap.innerHTML='';
+  const statsDiv=document.createElement('div');statsDiv.className='stats';
+  statsDiv.innerHTML='<div class="stat"><div class="stat-n" id="s-total">'+names.length+'</div><div class="stat-l">total</div></div><div class="stat"><div class="stat-n" id="s-ok">0</div><div class="stat-l">enviados</div></div><div class="stat"><div class="stat-n" id="s-err">0</div><div class="stat-l">erros</div></div>';
+  wrap.appendChild(statsDiv);
+  const resList=document.createElement('div');resList.className='results';wrap.appendChild(resList);
+  let ok=0,err=0;
+  for(const name of names){
+    const firstName=name.split(' ')[0],msg=buildMsg(firstName);
+    const item=document.createElement('div');item.className='r-item r-pending';
+    item.innerHTML='<div class="spinner"></div><span class="r-name">'+name+'</span><span style="font-size:11px;margin-left:4px;color:var(--nu-text-faint)">enviando...</span>';
+    resList.appendChild(item);
+    try{
+      const res=await fetch('/api/slack',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,message:msg})});
+      const data=await res.json();
+      if(data.success){
+        ok++;document.getElementById('s-ok').textContent=ok;
+        item.className='r-item r-ok';
+        item.innerHTML='<div class="dot" style="background:var(--nu-green)"></div><span class="r-name">'+name+'<span class="tag tag-ok">enviado</span></span>'+(data.channel_link?'<a class="r-link" href="'+data.channel_link+'" target="_blank">ver no Slack →</a>':'');
+      }else{
+        err++;document.getElementById('s-err').textContent=err;
+        item.className='r-item r-err';
+        item.innerHTML='<div class="dot" style="background:var(--nu-red)"></div><span class="r-name">'+name+'</span><span style="font-size:11px;margin-left:4px">'+(data.error||'erro desconhecido')+'</span>';
+      }
+    }catch(e){
+      err++;document.getElementById('s-err').textContent=err;
+      item.className='r-item r-err';
+      item.innerHTML='<div class="dot" style="background:var(--nu-red)"></div><span class="r-name">'+name+'</span><span style="font-size:11px;margin-left:4px">falha de conexão</span>';
+    }
+  }
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>
