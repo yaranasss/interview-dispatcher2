@@ -7,83 +7,94 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --nu-purple:#820AD1;--nu-purple-light:#A020F0;--nu-purple-dim:rgba(130,10,209,0.15);
-      --nu-purple-border:rgba(130,10,209,0.3);--nu-bg:#0F0018;--nu-surface:#1A0030;
-      --nu-surface2:#220040;--nu-border:rgba(160,32,240,0.2);--nu-border-hover:rgba(160,32,240,0.45);
-      --nu-text:#F0E6FF;--nu-text-muted:#A07FC0;--nu-text-faint:#6A4A8A;
-      --nu-green:#3DDC84;--nu-green-dim:rgba(61,220,132,0.12);
-      --nu-red:#FF6B6B;--nu-red-dim:rgba(255,107,107,0.12);
+      --p:#820AD1;--pl:#A020F0;--pdim:rgba(130,10,209,0.15);--pborder:rgba(130,10,209,0.3);
+      --bg:#0F0018;--s1:#1A0030;--s2:#220040;--border:rgba(160,32,240,0.2);--bh:rgba(160,32,240,0.45);
+      --t:#F0E6FF;--tm:#A07FC0;--tf:#6A4A8A;
+      --g:#3DDC84;--gdim:rgba(61,220,132,0.12);--r:#FF6B6B;--rdim:rgba(255,107,107,0.12);
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Google Sans','Helvetica Neue',sans-serif;background:var(--nu-bg);color:var(--nu-text);min-height:100vh}
-    .topbar{background:var(--nu-surface);border-bottom:1px solid var(--nu-border);padding:0 32px;height:60px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10}
-    .nu-mark{width:32px;height:32px;background:var(--nu-purple);border-radius:8px;display:flex;align-items:center;justify-content:center}
-    .nu-mark svg{width:18px;height:18px}
-    .topbar-title{font-size:15px;font-weight:600}
-    .topbar-sub{font-size:12px;color:var(--nu-text-muted);margin-left:2px}
-    .main{max-width:680px;margin:0 auto;padding:32px 24px 64px}
-    .section{margin-bottom:20px}
-    .section-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--nu-text-faint);margin-bottom:10px;padding-left:2px}
-    .card{background:var(--nu-surface);border:1px solid var(--nu-border);border-radius:16px;padding:20px}
-    label{font-size:12px;color:var(--nu-text-muted);display:block;margin-bottom:5px}
-    input,select,textarea{width:100%;font-family:'Google Sans',sans-serif;font-size:13px;padding:9px 12px;background:var(--nu-surface2);border:1px solid var(--nu-border);border-radius:8px;color:var(--nu-text);transition:border-color .15s;appearance:none}
-    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--nu-purple-light);box-shadow:0 0 0 3px rgba(130,10,209,0.15)}
-    input::placeholder,textarea::placeholder{color:var(--nu-text-faint)}
-    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07FC0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+    body{font-family:'Google Sans','Helvetica Neue',sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
+    .topbar{background:var(--s1);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:12px}
+    .logo{width:30px;height:30px;background:var(--p);border-radius:7px;display:flex;align-items:center;justify-content:center}
+    .logo svg{width:17px;height:17px}
+    .title{font-size:14px;font-weight:600}
+    .sub{font-size:12px;color:var(--tm);margin-left:2px}
+    .main{max-width:620px;margin:0 auto;padding:28px 20px 60px}
+    .section{margin-bottom:18px}
+    .slabel{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tf);margin-bottom:8px;padding-left:2px}
+    .card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:18px}
+    label{font-size:12px;color:var(--tm);display:block;margin-bottom:5px}
+    input,select,textarea{width:100%;font-family:'Google Sans',sans-serif;font-size:13px;padding:8px 11px;background:var(--s2);border:1px solid var(--border);border-radius:7px;color:var(--t);appearance:none}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pl);box-shadow:0 0 0 3px rgba(130,10,209,0.12)}
+    input::placeholder,textarea::placeholder{color:var(--tf)}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07FC0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
     select option{background:#220040}
-    .field{margin-bottom:14px}.field:last-child{margin-bottom:0}
-    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    textarea{resize:vertical;min-height:60px;line-height:1.5}
-    .person-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-    .avatar{width:32px;height:32px;border-radius:50%;background:var(--nu-purple-dim);border:1px solid var(--nu-purple-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#C97AF9;flex-shrink:0;transition:background .2s}
-    .avatar.filled{background:var(--nu-purple);color:#fff;border-color:var(--nu-purple)}
-    .person-row input{flex:1;min-width:0}
-    .rm-btn{width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;color:var(--nu-text-faint);font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,color .15s}
-    .rm-btn:hover{background:var(--nu-red-dim);color:var(--nu-red)}
-    .add-btn{width:100%;padding:8px;background:none;border:1px dashed var(--nu-border);border-radius:8px;cursor:pointer;font-family:'Google Sans',sans-serif;font-size:12px;color:var(--nu-text-muted);transition:border-color .15s,color .15s,background .15s;margin-top:10px}
-    .add-btn:hover{border-color:var(--nu-border-hover);color:#C97AF9;background:var(--nu-purple-dim)}
-    .preview-box{background:var(--nu-surface2);border:1px solid var(--nu-border);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--nu-text-muted);min-height:40px;line-height:1.6;font-style:italic}
-    hr{border:none;border-top:1px solid var(--nu-border);margin:16px 0}
-    .send-btn{width:100%;padding:14px;background:var(--nu-purple);border:none;border-radius:12px;font-family:'Google Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:8px;transition:background .15s,transform .1s,opacity .15s}
-    .send-btn:hover{background:var(--nu-purple-light)}
-    .send-btn:active{transform:scale(.98)}
-    .send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0 12px}
-    .stat{background:var(--nu-surface);border:1px solid var(--nu-border);border-radius:10px;padding:12px;text-align:center}
-    .stat-n{font-size:24px;font-weight:700}
-    .stat-l{font-size:11px;color:var(--nu-text-muted);margin-top:2px}
-    .results{display:flex;flex-direction:column;gap:6px}
-    .r-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:13px;border:1px solid transparent;animation:fadeIn .25s ease}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-    .r-pending{background:var(--nu-surface);border-color:var(--nu-border);color:var(--nu-text-muted)}
-    .r-ok{background:var(--nu-green-dim);border-color:rgba(61,220,132,0.3);color:var(--nu-green)}
-    .r-err{background:var(--nu-red-dim);border-color:rgba(255,107,107,0.3);color:var(--nu-red)}
+    .field{margin-bottom:13px}.field:last-child{margin-bottom:0}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    textarea{resize:vertical;min-height:56px;line-height:1.5}
+    .prow{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+    .av{width:30px;height:30px;border-radius:50%;background:var(--pdim);border:1px solid var(--pborder);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#C97AF9;flex-shrink:0;transition:background .2s}
+    .av.on{background:var(--p);color:#fff;border-color:var(--p)}
+    .prow input{flex:1;min-width:0}
+    .rmbtn{width:26px;height:26px;border-radius:6px;border:none;background:none;cursor:pointer;color:var(--tf);font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .rmbtn:hover{background:var(--rdim);color:var(--r)}
+    .addbtn{width:100%;padding:7px;background:none;border:1px dashed var(--border);border-radius:7px;cursor:pointer;font-family:'Google Sans',sans-serif;font-size:12px;color:var(--tm);margin-top:9px}
+    .addbtn:hover{border-color:var(--bh);color:#C97AF9;background:var(--pdim)}
+    .prev{background:var(--s2);border:1px solid var(--border);border-radius:7px;padding:9px 12px;font-size:13px;color:var(--tm);min-height:38px;line-height:1.6;font-style:italic}
+    hr{border:none;border-top:1px solid var(--border);margin:14px 0}
+    .sendbtn{width:100%;padding:13px;background:var(--p);border:none;border-radius:11px;font-family:'Google Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:6px;transition:background .15s,transform .1s,opacity .15s}
+    .sendbtn:hover{background:var(--pl)}
+    .sendbtn:active{transform:scale(.98)}
+    .sendbtn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+    .tokencard{background:var(--s1);border:1px solid rgba(255,200,0,0.25);border-radius:14px;padding:18px;margin-bottom:18px}
+    .tokenlabel{font-size:11px;color:#f0c040;margin-bottom:6px;font-weight:600}
+    .tokendesc{font-size:11px;color:var(--tm);margin-bottom:10px;line-height:1.5}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 10px}
+    .stat{background:var(--s1);border:1px solid var(--border);border-radius:9px;padding:11px;text-align:center}
+    .statn{font-size:22px;font-weight:700}
+    .statl{font-size:11px;color:var(--tm);margin-top:2px}
+    .results{display:flex;flex-direction:column;gap:5px}
+    .ri{display:flex;align-items:center;gap:9px;padding:10px 13px;border-radius:9px;font-size:13px;border:1px solid transparent;animation:fi .2s ease}
+    @keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+    .rp{background:var(--s1);border-color:var(--border);color:var(--tm)}
+    .rok{background:var(--gdim);border-color:rgba(61,220,132,0.3);color:var(--g)}
+    .rerr{background:var(--rdim);border-color:rgba(255,107,107,0.3);color:var(--r)}
     .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-    .spinner{width:14px;height:14px;flex-shrink:0;border:2px solid var(--nu-border);border-top-color:var(--nu-purple-light);border-radius:50%;animation:spin .7s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-left:6px}
-    .tag-ok{background:rgba(61,220,132,0.2);color:var(--nu-green)}
-    .r-link{margin-left:auto;font-size:11px;color:#C97AF9;text-decoration:none;white-space:nowrap}
-    .r-link:hover{color:var(--nu-text)}
-    .r-name{font-weight:500}
+    .spin{width:13px;height:13px;flex-shrink:0;border:2px solid var(--border);border-top-color:var(--pl);border-radius:50%;animation:sp .7s linear infinite}
+    @keyframes sp{to{transform:rotate(360deg)}}
+    .tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:100px;margin-left:5px}
+    .tagok{background:rgba(61,220,132,0.2);color:var(--g)}
+    .rlink{margin-left:auto;font-size:11px;color:#C97AF9;text-decoration:none;white-space:nowrap}
+    .rname{font-weight:500}
     .hidden{display:none}
   </style>
 </head>
 <body>
 <div class="topbar">
-  <div class="nu-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h4l8 12h4V20h-4L8 8H4V4z" fill="white"/></svg></div>
-  <div><span class="topbar-title">Interview Dispatcher</span><span class="topbar-sub"> — Nubank Recruiting</span></div>
+  <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h4l8 12h4V20h-4L8 8H4V4z" fill="white"/></svg></div>
+  <div><span class="title">Interview Dispatcher</span><span class="sub"> — Nubank Recruiting</span></div>
 </div>
 <div class="main">
+
   <div class="section">
-    <div class="section-label">Participantes</div>
-    <div class="card">
-      <div id="people-list"></div>
-      <button class="add-btn" onclick="addPerson()">+ adicionar pessoa</button>
+    <div class="slabel">Configuração</div>
+    <div class="tokencard">
+      <div class="tokenlabel">Slack Bot Token</div>
+      <div class="tokendesc">Cole o token do seu bot Slack (xoxb-...). Fica salvo só no seu browser.</div>
+      <input type="password" id="token" placeholder="xoxb-..." oninput="saveToken()" />
     </div>
   </div>
+
   <div class="section">
-    <div class="section-label">Detalhes da entrevista</div>
+    <div class="slabel">Participantes</div>
+    <div class="card">
+      <div id="plist"></div>
+      <button class="addbtn" onclick="addPerson()">+ adicionar pessoa</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="slabel">Detalhes da entrevista</div>
     <div class="card">
       <div class="row2 field">
         <div><label>Tipo</label>
@@ -96,7 +107,7 @@
         <div><label>Horário</label><input type="time" id="horario" value="13:00" oninput="updatePreview()" /></div>
       </div>
       <div class="field hidden" id="outro-field">
-        <label>Especifique o tipo</label>
+        <label>Especifique</label>
         <input type="text" id="outro-tipo" placeholder="Ex: Product Case" oninput="updatePreview()" />
       </div>
       <div class="field">
@@ -106,70 +117,175 @@
         </select>
       </div>
       <hr />
-      <div class="field"><label>Prévia da mensagem</label><div class="preview-box" id="preview"></div></div>
+      <div class="field"><label>Prévia</label><div class="prev" id="preview"></div></div>
       <div class="field">
-        <label>Mensagem customizada <span style="color:var(--nu-text-faint);font-size:11px">(opcional)</span></label>
-        <textarea id="custom-msg" placeholder="Deixe vazio para usar a mensagem padrão..." oninput="updatePreview()"></textarea>
+        <label>Mensagem customizada <span style="color:var(--tf);font-size:11px">(opcional)</span></label>
+        <textarea id="custom" placeholder="Deixe vazio para usar a padrão..." oninput="updatePreview()"></textarea>
       </div>
     </div>
   </div>
-  <button class="send-btn" id="send-btn" onclick="enviar()">Enviar mensagens</button>
-  <div id="results-wrap"></div>
+
+  <button class="sendbtn" id="sendbtn" onclick="enviar()">Enviar mensagens</button>
+  <div id="reswrap"></div>
 </div>
+
 <script>
-let counter=0;
-function initials(n){const p=n.trim().split(' ').filter(Boolean);return p.length===0?'?':p.length===1?p[0][0].toUpperCase():(p[0][0]+p[p.length-1][0]).toUpperCase()}
-function addPerson(){
-  const list=document.getElementById('people-list'),id=counter++;
-  const row=document.createElement('div');row.className='person-row';row.id='row-'+id;
-  row.innerHTML='<div class="avatar" id="av-'+id+'">?</div><input type="text" placeholder="Nome completo" class="person-input" oninput="onNameInput(this,\'av-'+id+'\')" /><button class="rm-btn" onclick="removePerson(\'row-'+id+'\')">×</button>';
-  document.getElementById('people-list').appendChild(row);row.querySelector('input').focus();updatePreview();
+let cnt = 0;
+
+// Carrega token salvo
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('nu_slack_token');
+  if (saved) document.getElementById('token').value = saved;
+  addPerson();
+  updatePreview();
+});
+
+function saveToken() {
+  localStorage.setItem('nu_slack_token', document.getElementById('token').value);
 }
-function onNameInput(inp,avId){const av=document.getElementById(avId),ini=initials(inp.value);av.textContent=ini==='?'?'?':ini;av.className=inp.value.trim()?'avatar filled':'avatar';updatePreview()}
-function removePerson(rowId){if(document.querySelectorAll('.person-row').length>1)document.getElementById(rowId).remove();updatePreview()}
-function getNames(){return[...document.querySelectorAll('.person-input')].map(i=>i.value.trim()).filter(Boolean)}
-function getTipo(){const s=document.getElementById('tipo').value;return s==='Outro'?(document.getElementById('outro-tipo').value.trim()||'entrevista'):s}
-function onTipoChange(){document.getElementById('outro-field').classList.toggle('hidden',document.getElementById('tipo').value!=='Outro');updatePreview()}
-function buildMsg(firstName){
-  const custom=document.getElementById('custom-msg').value.trim();if(custom)return custom;
-  const tipo=getTipo(),hora=document.getElementById('horario').value||'—',lang=document.getElementById('idioma').value;
-  return lang==='en'?'Hi '+firstName+"! Hope you're doing well. Are you available to join a "+tipo+' today at '+hora+'?':'Oi, '+firstName+'! Tudo bem? Você consegue participar de um(a) '+tipo+' hoje às '+hora+'?'
+
+function initials(n) {
+  const p = n.trim().split(' ').filter(Boolean);
+  return p.length === 0 ? '?' : p.length === 1 ? p[0][0].toUpperCase() : (p[0][0] + p[p.length-1][0]).toUpperCase();
 }
-function updatePreview(){const names=getNames();document.getElementById('preview').textContent=buildMsg(names.length?names[0].split(' ')[0]:'[Nome]')}
-addPerson();
-async function enviar(){
-  const names=getNames();if(!names.length){alert('Adicione ao menos uma pessoa.');return}
-  const btn=document.getElementById('send-btn');btn.disabled=true;
-  const wrap=document.getElementById('results-wrap');wrap.innerHTML='';
-  const statsDiv=document.createElement('div');statsDiv.className='stats';
-  statsDiv.innerHTML='<div class="stat"><div class="stat-n" id="s-total">'+names.length+'</div><div class="stat-l">total</div></div><div class="stat"><div class="stat-n" id="s-ok">0</div><div class="stat-l">enviados</div></div><div class="stat"><div class="stat-n" id="s-err">0</div><div class="stat-l">erros</div></div>';
+
+function addPerson() {
+  const id = cnt++;
+  const row = document.createElement('div');
+  row.className = 'prow'; row.id = 'row-' + id;
+  row.innerHTML = '<div class="av" id="av-' + id + '">?</div>' +
+    '<input type="text" placeholder="Nome completo" class="pinput" oninput="onNI(this,\'av-' + id + '\')" />' +
+    '<button class="rmbtn" onclick="rmPerson(\'row-' + id + '\')">×</button>';
+  document.getElementById('plist').appendChild(row);
+  row.querySelector('input').focus();
+  updatePreview();
+}
+
+function onNI(inp, avId) {
+  const av = document.getElementById(avId);
+  av.textContent = initials(inp.value) || '?';
+  av.className = inp.value.trim() ? 'av on' : 'av';
+  updatePreview();
+}
+
+function rmPerson(id) {
+  if (document.querySelectorAll('.prow').length > 1) document.getElementById(id).remove();
+  updatePreview();
+}
+
+function getNames() {
+  return [...document.querySelectorAll('.pinput')].map(i => i.value.trim()).filter(Boolean);
+}
+
+function getTipo() {
+  const s = document.getElementById('tipo').value;
+  return s === 'Outro' ? (document.getElementById('outro-tipo').value.trim() || 'entrevista') : s;
+}
+
+function onTipoChange() {
+  document.getElementById('outro-field').classList.toggle('hidden', document.getElementById('tipo').value !== 'Outro');
+  updatePreview();
+}
+
+function buildMsg(firstName) {
+  const c = document.getElementById('custom').value.trim();
+  if (c) return c;
+  const tipo = getTipo(), hora = document.getElementById('horario').value || '—', lang = document.getElementById('idioma').value;
+  return lang === 'en'
+    ? `Hi ${firstName}! Hope you're doing well. Are you available to join a ${tipo} today at ${hora}?`
+    : `Oi, ${firstName}! Tudo bem? Você consegue participar de um(a) ${tipo} hoje às ${hora}?`;
+}
+
+function updatePreview() {
+  const names = getNames();
+  document.getElementById('preview').textContent = buildMsg(names.length ? names[0].split(' ')[0] : '[Nome]');
+}
+
+async function slackFetch(endpoint, token, body) {
+  const res = await fetch('https://slack.com/api/' + endpoint, {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return res.json();
+}
+
+async function findUser(name, token) {
+  const nameParts = name.toLowerCase().trim().split(' ').filter(Boolean);
+  let cursor = '';
+  for (let i = 0; i < 15; i++) {
+    const url = 'https://slack.com/api/users.list?limit=200' + (cursor ? '&cursor=' + cursor : '');
+    const res = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    const user = data.members?.find(m => {
+      if (m.deleted || m.is_bot || m.id === 'USLACKBOT') return false;
+      const full = (m.real_name || '').toLowerCase();
+      const disp = (m.profile?.display_name || '').toLowerCase();
+      return nameParts.every(p => full.includes(p) || disp.includes(p));
+    });
+    if (user) return user;
+    cursor = data.response_metadata?.next_cursor || '';
+    if (!cursor) break;
+  }
+  throw new Error(`"${name}" não encontrado`);
+}
+
+async function enviar() {
+  const token = document.getElementById('token').value.trim();
+  if (!token) { alert('Cole o Slack Bot Token primeiro!'); return; }
+  const names = getNames();
+  if (!names.length) { alert('Adicione ao menos uma pessoa.'); return; }
+
+  const btn = document.getElementById('sendbtn');
+  btn.disabled = true;
+  const wrap = document.getElementById('reswrap');
+  wrap.innerHTML = '';
+
+  const statsDiv = document.createElement('div');
+  statsDiv.className = 'stats';
+  statsDiv.innerHTML = '<div class="stat"><div class="statn" id="st">' + names.length + '</div><div class="statl">total</div></div>' +
+    '<div class="stat"><div class="statn" id="sok">0</div><div class="statl">enviados</div></div>' +
+    '<div class="stat"><div class="statn" id="serr">0</div><div class="statl">erros</div></div>';
   wrap.appendChild(statsDiv);
-  const resList=document.createElement('div');resList.className='results';wrap.appendChild(resList);
-  let ok=0,err=0;
-  for(const name of names){
-    const firstName=name.split(' ')[0],msg=buildMsg(firstName);
-    const item=document.createElement('div');item.className='r-item r-pending';
-    item.innerHTML='<div class="spinner"></div><span class="r-name">'+name+'</span><span style="font-size:11px;margin-left:4px;color:var(--nu-text-faint)">enviando...</span>';
+
+  const resList = document.createElement('div');
+  resList.className = 'results';
+  wrap.appendChild(resList);
+
+  let ok = 0, err = 0;
+
+  for (const name of names) {
+    const firstName = name.split(' ')[0];
+    const msg = buildMsg(firstName);
+    const item = document.createElement('div');
+    item.className = 'ri rp';
+    item.innerHTML = '<div class="spin"></div><span class="rname">' + name + '</span><span style="font-size:11px;margin-left:4px;color:var(--tf)">buscando...</span>';
     resList.appendChild(item);
-    try{
-      const res=await fetch('/api/slack',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,message:msg})});
-      const data=await res.json();
-      if(data.success){
-        ok++;document.getElementById('s-ok').textContent=ok;
-        item.className='r-item r-ok';
-        item.innerHTML='<div class="dot" style="background:var(--nu-green)"></div><span class="r-name">'+name+'<span class="tag tag-ok">enviado</span></span>'+(data.channel_link?'<a class="r-link" href="'+data.channel_link+'" target="_blank">ver no Slack →</a>':'');
-      }else{
-        err++;document.getElementById('s-err').textContent=err;
-        item.className='r-item r-err';
-        item.innerHTML='<div class="dot" style="background:var(--nu-red)"></div><span class="r-name">'+name+'</span><span style="font-size:11px;margin-left:4px">'+(data.error||'erro desconhecido')+'</span>';
-      }
-    }catch(e){
-      err++;document.getElementById('s-err').textContent=err;
-      item.className='r-item r-err';
-      item.innerHTML='<div class="dot" style="background:var(--nu-red)"></div><span class="r-name">'+name+'</span><span style="font-size:11px;margin-left:4px">falha de conexão</span>';
+
+    try {
+      const user = await findUser(name, token);
+      item.innerHTML = '<div class="spin"></div><span class="rname">' + name + '</span><span style="font-size:11px;margin-left:4px;color:var(--tf)">enviando...</span>';
+
+      const dm = await slackFetch('conversations.open', token, { users: user.id });
+      if (!dm.ok) throw new Error(dm.error);
+
+      const msg2 = await slackFetch('chat.postMessage', token, { channel: dm.channel.id, text: msg });
+      if (!msg2.ok) throw new Error(msg2.error);
+
+      ok++;
+      document.getElementById('sok').textContent = ok;
+      item.className = 'ri rok';
+      item.innerHTML = '<div class="dot" style="background:var(--g)"></div><span class="rname">' + name + '<span class="tag tagok">enviado</span></span>' +
+        '<a class="rlink" href="https://slack.com/app_redirect?channel=' + dm.channel.id + '" target="_blank">ver no Slack →</a>';
+    } catch (e) {
+      err++;
+      document.getElementById('serr').textContent = err;
+      item.className = 'ri rerr';
+      item.innerHTML = '<div class="dot" style="background:var(--r)"></div><span class="rname">' + name + '</span><span style="font-size:11px;margin-left:4px">' + e.message + '</span>';
     }
   }
-  btn.disabled=false;
+  btn.disabled = false;
 }
 </script>
 </body>
